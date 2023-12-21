@@ -1,4 +1,4 @@
 #!/bin/bash
 addgroup security
-chown :$1 $2
+chown :root $2
 chmod g+rx $2
