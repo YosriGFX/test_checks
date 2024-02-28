@@ -1,13 +1,2 @@
 #!/bin/bash
-
-function ord {
-        printf %d "'$1";
-}
-
-e=`echo "${1/\{xor\}/""}" | base64 --decode`
-
-seq 0 $((${#e}-1)) | while read line
-do
-        char=$((`ord ${e:$line:1}` ^ `ord _`))
-        printf \\$(printf '%03o' $char)
-done
+python3 -c "from base64 import b64decode; print(bytes(byte ^ 0x5f for byte in b64decode('$1'.replace('{xor}', ''))).decode('utf-8'))"
